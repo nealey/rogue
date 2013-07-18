@@ -119,7 +119,6 @@ setup(void)
     signal(SIGILL, auto_save);
     signal(SIGTRAP, auto_save);
     signal(SIGIOT, auto_save);
-    signal(SIGEMT, auto_save);
     signal(SIGFPE, auto_save);
     signal(SIGBUS, auto_save);
     signal(SIGSEGV, auto_save);

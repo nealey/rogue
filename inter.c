@@ -51,6 +51,9 @@ static char *Rip[] = {
 void
 score(int amount, int flags, char monst)
 {
+#ifndef SCOREFILE
+  return;
+#else
     SCORE *scp;
     int i;
     SCORE *sc2;
@@ -124,6 +127,7 @@ score(int amount, int flags, char monst)
     close(Fd);
     Fd = open(SCOREFILE, O_RDWR);
     outf = fdopen(Fd, "w");
+
     /*
      * Insert her in list if need be
      */
@@ -238,6 +242,7 @@ score(int amount, int flags, char monst)
 	}
     }
     fclose(outf);
+#endif SCOREFILE
 }
 
 /*

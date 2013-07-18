@@ -358,6 +358,7 @@ encread(char *start, unsigned int size, int inf)
     }
 }
 
+#ifdef SCOREFILE
 /*
  * read_scrore
  *	Read in the score file
@@ -375,3 +376,4 @@ wr_score(SCORE *top_ten, FILE *outf)
 {
     encwrite((char *) top_ten, numscores * sizeof (SCORE), outf);
 }
+#endif

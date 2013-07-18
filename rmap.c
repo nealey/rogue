@@ -30,7 +30,6 @@ main(int argc, char **argv, char **envp)
     signal(SIGILL, exit);
     signal(SIGTRAP, exit);
     signal(SIGIOT, exit);
-    signal(SIGEMT, exit);
     signal(SIGFPE, exit);
     signal(SIGBUS, exit);
     signal(SIGSEGV, exit);
@@ -350,59 +349,6 @@ leave(int sig)
 #endif	attron
     putchar('\n');
     my_exit(0);
-}
-
-/*
- * shell:
- *	Let them escape for a while
- */
-void
-shell(void)
-{
-    int pid;
-    char *sh;
-    int ret_status;
-
-    /*
-     * Set the terminal back to original mode
-     */
-    move(LINES-1, 0);
-    refresh();
-    endwin();
-    resetltchars();
-    putchar('\n');
-    In_shell = TRUE;
-    After = FALSE;
-    sh = getenv("SHELL");
-    fflush(stdout);
-    /*
-     * Fork and do a shell
-     */
-    while ((pid = fork()) < 0)
-	sleep(1);
-    if (pid == 0)
-    {
-	execl(sh == NULL ? "/bin/sh" : sh, "shell", "-i", 0);
-	perror("No shelly");
-	exit(-1);
-    }
-    else
-    {
-	signal(SIGINT, SIG_IGN);
-	signal(SIGQUIT, SIG_IGN);
-	while (wait(&ret_status) != pid)
-	    continue;
-	signal(SIGINT, quit);
-	signal(SIGQUIT, endit);
-	printf("\n[Press return to continue]");
-	fflush(stdout);
-	noecho();
-	crmode();
-	playltchars();
-	In_shell = FALSE;
-	wait_for('\n');
-	clearok(stdscr, TRUE);
-    }
 }
 
 /*

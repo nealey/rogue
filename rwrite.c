@@ -164,7 +164,6 @@ over:
 			msg("not standing on any object");
 		    }
 		}
-		when '!': shell();
 		when 'h': do_move(0, -1);
 		when 'j': do_move(1, 0);
 		when 'k': do_move(-1, 0);
