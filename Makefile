@@ -5,12 +5,12 @@ OBJS =	terminal.o rmove.o network.o netprot.o rwrite.o rread.o \
 	system.o ctlmod.o \
 	find.o inter.o
 
-LDFLAGS = -lncurses -lcrypt
+LDFLAGS = $(shell pkg-config --libs ncurses)
 
 default: rogue
 
 rogue: $(OBJS)
-	$(CC) -o $@ $(LDFLAGS) $^
+	$(CC) -o $@ $^ $(LDFLAGS)
 
 clean:
 	rm -f $(OBJS) rogue

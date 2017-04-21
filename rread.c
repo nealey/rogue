@@ -96,8 +96,7 @@ kill_daemon(void (*func)(int))
  *	passing the argument to the function.
  */
 void
-do_daemons(flag)
-int flag;
+do_daemons(int flag)
 {
     struct delayed_action *dev;
 

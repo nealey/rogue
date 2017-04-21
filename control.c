@@ -6,6 +6,7 @@
 
 #include <curses.h>
 #include <ctype.h>
+#include <string.h>
 #include "netprot.h"
 
 /*
@@ -269,5 +270,5 @@ show_win(char *message)
     clearok(curscr, TRUE);
 #ifdef	attron
     touchwin(stdscr);
-#endif	attron
+#endif	/* attron */
 }

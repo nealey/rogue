@@ -387,4 +387,4 @@ struct h_list Helpstr[] = {
 
 #ifdef TIOCGLTC
 struct ltchars Ltc;		/* needed to change ^Y to not be suspchar */
-#endif TIOCGLTC
+#endif /* TIOCGLTC */
